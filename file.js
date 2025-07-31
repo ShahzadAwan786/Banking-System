@@ -26,7 +26,7 @@
 // ];
 
 const previous =  localStorage.getItem('users')
-const users =previous ? JSON.parse(previous): []
+const users = previous ? JSON.parse(previous): []
 console.log(previous)
 
 function adduser() {
@@ -129,6 +129,7 @@ function deposit(userId) {
 
 function editUser(userId) {
   const user = users.find((user) => user.id === userId);
+
   if (user) {
     const updatedName = prompt("Enter new username:");
 
