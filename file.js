@@ -27,7 +27,6 @@
 
 const previous =  localStorage.getItem('users')
 const users = previous ? JSON.parse(previous): []
-console.log(previous)
 
 function adduser() {
   const username = prompt("Add your username");
@@ -70,8 +69,7 @@ function displayUsers() {
   // user.innerHTML = users.
   const user = document.getElementById("data");
   const storedUsers = JSON.parse(localStorage.getItem("users"))||[]
-  console.log(users);
-  console.log(storedUsers);
+ 
   user.innerHTML = storedUsers
     .map((user) => {
       return `
