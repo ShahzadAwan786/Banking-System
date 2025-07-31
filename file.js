@@ -1,29 +1,33 @@
-const users = [
-  {
-    id: 1,
-    account: 1,
-    username: "Shahzad Ashraf",
-    balance: 0,
-    deposit: 0,
-    withdraw: 0,
-  },
-  {
-    id: 2,
-    account: 2,
-    username: "Wasif Ali",
-    balance: 2000,
-    deposit: 0,
-    withdraw: 0,
-  },
-  {
-    id: 3,
-    account: 3,
-    username: "Ahmad",
-    balance: 200,
-    deposit: 0,
-    withdraw: 0,
-  },
-];
+// const users = [
+//   {
+//     id: 1,
+//     account: 1,
+//     username: "Shahzad Ashraf",
+//     balance: 0,
+//     deposit: 0,
+//     withdraw: 0,
+//   },
+//   {
+//     id: 2,
+//     account: 2,
+//     username: "Wasif Ali",
+//     balance: 2000,
+//     deposit: 0,
+//     withdraw: 0,
+//   },
+//   {
+//     id: 3,
+//     account: 3,
+//     username: "Ahmad",
+//     balance: 200,
+//     deposit: 0,
+//     withdraw: 0,
+//   },
+// ];
+
+const previous =  localStorage.getItem('users')
+const users =previous ? JSON.parse(previous): []
+console.log(previous)
 
 function adduser() {
   const username = prompt("Add your username");
@@ -38,7 +42,7 @@ function adduser() {
       username: username,
       id: users.length ? users[users.length - 1].id + 1 : 1,
       account: account,
-      balance: balance,
+      balance: parseFloat(balance),
     };
   } else {
     alert(
@@ -65,7 +69,7 @@ function displayUsers() {
   //  const users = JSON.parse(allusers)
   // user.innerHTML = users.
   const user = document.getElementById("data");
-  const storedUsers = JSON.parse(localStorage.getItem("users"));
+  const storedUsers = JSON.parse(localStorage.getItem("users"))||[]
   console.log(users);
   console.log(storedUsers);
   user.innerHTML = storedUsers
@@ -90,7 +94,7 @@ displayUsers();
 
 function withdraw(userId) {
   const user = users.find((item) => item.id === userId);
-  localStorage.setItem("users", JSON.stringify(users));
+
   if (user) {
     const withdrawAmount = parseFloat(prompt("Enter your withdraw amount"));
     if (
@@ -110,7 +114,7 @@ function withdraw(userId) {
 
 function deposit(userId) {
   const user = users.find((user) => user.id === userId);
-  localStorage.setItem("users", JSON.stringify(users));
+
   if (user) {
     const depositAmount = parseFloat(prompt("Enter your deposit amount"));
     if (depositAmount !== null && depositAmount >= 0) {
@@ -125,7 +129,6 @@ function deposit(userId) {
 
 function editUser(userId) {
   const user = users.find((user) => user.id === userId);
-  localStorage.setItem("users", JSON.stringify(users));
   if (user) {
     const updatedName = prompt("Enter new username:");
 
